@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Property {
+  id              String   @id @default(cuid())
+  adresse         String
+  codePostal      String
+  ville           String
+  surface         Float
+  type            String   @default("meuble")
+  prixAchat       Float
+  dateAcquisition DateTime
+  description     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  tenants       Tenant[]
+  leases        Lease[]
+  expenses      Expense[]
+  amortizations Amortization[]
+  documents     Document[]
+  equipment     Equipment[]
+}
+
+model Tenant {
+  id         String  @id @default(cuid())
+  nom        String
+  prenom     String
+  email      String?
+  telephone  String?
+  garantNom  String?
+  garantTel  String?
+  propertyId String
+  actif      Boolean @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id])
+  leases   Lease[]
+}
+
+model Lease {
+  id             String   @id @default(cuid())
+  dateDebut      DateTime
+  dateFin        DateTime?
+  loyerHC        Float
+  charges        Float
+  depotGarantie  Float
+  actif          Boolean  @default(true)
+  tenantId       String
+  propertyId     String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  tenant   Tenant   @relation(fields: [tenantId], references: [id])
+  property Property @relation(fields: [propertyId], references: [id])
+  payments Payment[]
+}
+
+model Payment {
+  id             String    @id @default(cuid())
+  mois           String    // Format YYYY-MM
+  montantAttendu Float
+  montantRecu    Float     @default(0)
+  datePaiement   DateTime?
+  statut         String    @default("impaye") // paye, en_retard, impaye
+  leaseId        String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  lease Lease @relation(fields: [leaseId], references: [id])
+}
+
+model Expense {
+  id              String   @id @default(cuid())
+  date            DateTime
+  montant         Float
+  categorie       String   // travaux, assurance_pno, taxe_fonciere, charges_copro, frais_comptable, interets_emprunt, cfe, divers
+  description     String?
+  justificatifUrl String?
+  propertyId      String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id])
+}
+
+model Amortization {
+  id         String   @id @default(cuid())
+  libelle    String
+  type       String   // bien, meuble, travaux
+  valeur     Float
+  duree      Int      // en années
+  dateDebut  DateTime
+  propertyId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id])
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  nom         String
+  type        String   // bail, etat_des_lieux, diagnostic, assurance, quittance, autre
+  fichierUrl  String
+  dateUpload  DateTime @default(now())
+  propertyId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id])
+}
+
+model Equipment {
+  id          String   @id @default(cuid())
+  nom         String
+  description String?
+  dateAchat   DateTime?
+  valeur      Float?
+  propertyId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id])
+}
