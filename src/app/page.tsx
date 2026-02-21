@@ -4,6 +4,7 @@ import { RevenusDepensesChart } from "@/components/dashboard/revenus-depenses-ch
 import { ProchinesEcheances } from "@/components/dashboard/prochaines-echeances"
 import { DerniersPaiements } from "@/components/dashboard/derniers-paiements"
 import { RepartitionDepenses } from "@/components/dashboard/repartition-depenses"
+import { MascotSun } from "@/components/groovy-mascots"
 
 export const dynamic = "force-dynamic"
 
@@ -144,13 +145,26 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
-      {/* En-tête */}
-      <div>
-        <h1 className="text-3xl font-bold">Tableau de bord</h1>
-        <p className="mt-1 text-muted-foreground">
-          Bienvenue — voici un résumé de votre bien
-        </p>
+      {/* En-tête groovy avec mascottes */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <MascotSun size={56} />
+          <div>
+            <h1 className="text-3xl font-bold">Tableau de bord</h1>
+            <p className="mt-1 text-muted-foreground">
+              Bienvenue — voici un résumé de votre bien
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 opacity-60">
+          <MascotSun size={28} />
+          <MascotSun size={28} />
+          <MascotSun size={24} />
+        </div>
       </div>
+
+      {/* Bande décorative tricolore */}
+      <div className="groovy-stripe" />
 
       {/* KPI Cards */}
       <KpiCards

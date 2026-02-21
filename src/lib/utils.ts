@@ -59,3 +59,34 @@ export function categorieLabel(categorie: string): string {
   }
   return labels[categorie] ?? categorie
 }
+
+export function metierLabel(metier: string): string {
+  const labels: Record<string, string> = {
+    plombier: "Plombier",
+    electricien: "Électricien",
+    serrurier: "Serrurier",
+    deratiseur: "Dératiseur",
+    peintre: "Peintre",
+    chauffagiste: "Chauffagiste",
+    menuisier: "Menuisier",
+    agent_immobilier: "Agent immobilier",
+    comptable: "Comptable",
+    assureur: "Assureur",
+    syndic: "Syndic",
+    autre: "Autre",
+  }
+  return labels[metier] ?? metier
+}
+
+export function formatMoisLong(mois: string): string {
+  const [annee, m] = mois.split("-")
+  const date = new Date(parseInt(annee), parseInt(m) - 1)
+  return new Intl.DateTimeFormat("fr-FR", { month: "long" }).format(date)
+}
+
+export function formatTaux(taux: number): string {
+  return new Intl.NumberFormat("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(taux) + " %"
+}

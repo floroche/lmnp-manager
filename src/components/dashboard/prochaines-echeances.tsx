@@ -14,33 +14,35 @@ interface ProchinesEcheancesProps {
 const typeConfig = {
   loyer: {
     icon: Calendar,
-    bg: "bg-[#4a5d3a]",
+    bg: "bg-[#3A8B5C]",
   },
   assurance: {
     icon: ShieldCheck,
-    bg: "bg-[#c8722a]",
+    bg: "bg-[#F5B731]",
+    iconColor: "text-[#1A3C2A]",
   },
   fiscal: {
     icon: FileText,
-    bg: "bg-[#8b5e34]",
+    bg: "bg-[#E8712A]",
   },
 }
 
 export function ProchinesEcheances({ echeances }: ProchinesEcheancesProps) {
   return (
-    <Card className="border-border/50 bg-card py-0 shadow-sm">
+    <Card className="py-0">
       <CardContent className="p-6">
         <h3 className="mb-5 text-lg font-bold">Prochaines échéances</h3>
-        <div className="space-y-4">
+        <div className="space-y-3">
           {echeances.map((e, i) => {
             const config = typeConfig[e.type]
             const Icon = config.icon
+            const iconColor = "iconColor" in config ? config.iconColor : "text-white"
             return (
-              <div key={i} className="flex items-center gap-4">
+              <div key={i} className="flex items-center gap-4 rounded-xl bg-secondary/60 px-4 py-3">
                 <div
                   className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${config.bg}`}
                 >
-                  <Icon className="h-4 w-4 text-white" />
+                  <Icon className={`h-4 w-4 ${iconColor}`} />
                 </div>
                 <div>
                   <p className="text-sm font-medium">{e.titre}</p>

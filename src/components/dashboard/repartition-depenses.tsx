@@ -20,7 +20,7 @@ interface RepartitionDepensesProps {
   data: DepenseCategorie[]
 }
 
-const COLORS = ["#c8722a", "#d4a843", "#8b5e34", "#4a5d3a", "#b8a88a", "#7a6e5d", "#c44b2f", "#6b8e5a"]
+const COLORS = ["#3A8B5C", "#F5B731", "#2D6B45", "#E8712A", "#7BC4A0", "#D4622B", "#A8D88E", "#D49A1A"]
 
 function CustomTooltip({
   active,
@@ -31,8 +31,8 @@ function CustomTooltip({
 }) {
   if (!active || !payload?.[0]) return null
   return (
-    <div className="rounded-lg border border-border bg-card p-3 shadow-md">
-      <p className="text-sm font-medium">
+    <div className="rounded-xl border bg-white p-3 shadow-[0_8px_24px_-4px_rgba(26,60,42,0.12)]">
+      <p className="text-sm font-semibold">
         {categorieLabel(payload[0].payload.categorie)}
       </p>
       <p className="text-sm text-muted-foreground">
@@ -49,7 +49,7 @@ export function RepartitionDepenses({ data }: RepartitionDepensesProps) {
   }))
 
   return (
-    <Card className="border-border/50 bg-card py-0 shadow-sm">
+    <Card className="py-0">
       <CardContent className="p-6">
         <h3 className="mb-6 text-lg font-bold">Répartition des dépenses</h3>
         <ResponsiveContainer width="100%" height={320}>
@@ -60,15 +60,17 @@ export function RepartitionDepenses({ data }: RepartitionDepensesProps) {
               cy="50%"
               innerRadius={70}
               outerRadius={110}
-              paddingAngle={2}
+              paddingAngle={3}
               dataKey="montant"
               nameKey="name"
+              stroke="white"
+              strokeWidth={3}
+              cornerRadius={4}
             >
               {chartData.map((_, i) => (
                 <Cell
                   key={`cell-${i}`}
                   fill={COLORS[i % COLORS.length]}
-                  stroke="none"
                 />
               ))}
             </Pie>

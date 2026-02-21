@@ -25,6 +25,8 @@ model Property {
   amortizations Amortization[]
   documents     Document[]
   equipment     Equipment[]
+  credits       Credit[]
+  contacts      Contact[]
 }
 
 model Tenant {
@@ -126,6 +128,61 @@ model Equipment {
   propertyId  String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  property Property @relation(fields: [propertyId], references: [id])
+}
+
+model Credit {
+  id           String   @id @default(cuid())
+  nom          String
+  montantTotal Float
+  tauxInteret  Float
+  dureeEnMois  Int
+  dateDebut    DateTime
+  banque       String?
+  propertyId   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  property              Property                 @relation(fields: [propertyId], references: [id])
+  echeancesAnnuelles    CreditEcheanceAnnuelle[]
+  echeancesMensuelles   CreditEcheanceMensuelle[]
+}
+
+model CreditEcheanceAnnuelle {
+  id       String @id @default(cuid())
+  annee    Int
+  montant  Float
+  creditId String
+
+  credit Credit @relation(fields: [creditId], references: [id], onDelete: Cascade)
+
+  @@unique([creditId, annee])
+}
+
+model CreditEcheanceMensuelle {
+  id       String  @id @default(cuid())
+  mois     String  // Format "YYYY-MM"
+  montant  Float
+  note     String?
+  creditId String
+
+  credit Credit @relation(fields: [creditId], references: [id], onDelete: Cascade)
+
+  @@unique([creditId, mois])
+}
+
+model Contact {
+  id         String   @id @default(cuid())
+  nom        String
+  metier     String
+  telephone  String?
+  email      String?
+  entreprise String?
+  notes      String?
+  propertyId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   property Property @relation(fields: [propertyId], references: [id])
 }

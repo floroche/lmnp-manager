@@ -33,8 +33,8 @@ function CustomTooltip({
 }) {
   if (!active || !payload) return null
   return (
-    <div className="rounded-lg border border-border bg-card p-3 shadow-md">
-      <p className="mb-1 text-sm font-medium">{label}</p>
+    <div className="rounded-xl border bg-white p-3 shadow-[0_8px_24px_-4px_rgba(26,60,42,0.12)]">
+      <p className="mb-1 text-sm font-semibold">{label}</p>
       {payload.map((entry, i) => (
         <p key={i} className="text-sm" style={{ color: entry.color }}>
           {entry.name} : {entry.value.toLocaleString("fr-FR")} &euro;
@@ -46,11 +46,11 @@ function CustomTooltip({
 
 export function RevenusDepensesChart({ data }: RevenusDepensesChartProps) {
   return (
-    <Card className="border-border/50 bg-card py-0 shadow-sm">
+    <Card className="py-0">
       <CardContent className="p-6">
         <h3 className="mb-6 text-lg font-bold">Revenus vs Dépenses</h3>
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data} barGap={2}>
+          <BarChart data={data} barGap={4}>
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="var(--border)"
@@ -71,22 +71,22 @@ export function RevenusDepensesChart({ data }: RevenusDepensesChartProps) {
             <Tooltip content={<CustomTooltip />} />
             <Legend
               wrapperStyle={{ fontSize: 13 }}
-              iconType="square"
+              iconType="circle"
               iconSize={10}
             />
             <Bar
               dataKey="revenus"
               name="Revenus"
-              fill="#c8722a"
-              radius={[3, 3, 0, 0]}
-              maxBarSize={24}
+              fill="#3A8B5C"
+              radius={[8, 8, 0, 0]}
+              maxBarSize={28}
             />
             <Bar
               dataKey="depenses"
               name="Dépenses"
-              fill="#d4a843"
-              radius={[3, 3, 0, 0]}
-              maxBarSize={24}
+              fill="#F5B731"
+              radius={[8, 8, 0, 0]}
+              maxBarSize={28}
             />
           </BarChart>
         </ResponsiveContainer>

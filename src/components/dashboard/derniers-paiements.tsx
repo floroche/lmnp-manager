@@ -24,11 +24,11 @@ interface DerniersPaiementsProps {
 function statutBadgeClass(statut: string) {
   switch (statut) {
     case "paye":
-      return "bg-[#4a5d3a]/15 text-[#4a5d3a] hover:bg-[#4a5d3a]/15 border-0"
+      return "bg-[#3A8B5C]/12 text-[#3A8B5C] hover:bg-[#3A8B5C]/12 border-0"
     case "en_retard":
-      return "bg-[#c8722a]/15 text-[#c8722a] hover:bg-[#c8722a]/15 border-0"
+      return "bg-[#F5B731]/15 text-[#D49A1A] hover:bg-[#F5B731]/15 border-0"
     case "impaye":
-      return "bg-[#c44b2f]/15 text-[#c44b2f] hover:bg-[#c44b2f]/15 border-0"
+      return "bg-[#D4622B]/12 text-[#D4622B] hover:bg-[#D4622B]/12 border-0"
     default:
       return ""
   }
@@ -36,22 +36,22 @@ function statutBadgeClass(statut: string) {
 
 export function DerniersPaiements({ paiements }: DerniersPaiementsProps) {
   return (
-    <Card className="border-border/50 bg-card py-0 shadow-sm">
+    <Card className="py-0">
       <CardContent className="p-6">
         <h3 className="mb-5 text-lg font-bold">Derniers paiements</h3>
         <Table>
           <TableHeader>
             <TableRow className="border-border/50">
-              <TableHead className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              <TableHead className="groovy-label text-xs text-muted-foreground">
                 Mois
               </TableHead>
-              <TableHead className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              <TableHead className="groovy-label text-xs text-muted-foreground">
                 Montant
               </TableHead>
-              <TableHead className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              <TableHead className="groovy-label text-xs text-muted-foreground">
                 Date
               </TableHead>
-              <TableHead className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              <TableHead className="groovy-label text-xs text-muted-foreground">
                 Statut
               </TableHead>
             </TableRow>

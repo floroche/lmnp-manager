@@ -8,6 +8,10 @@ const prisma = new PrismaClient({ adapter })
 
 async function main() {
   // Nettoyage
+  await prisma.contact.deleteMany()
+  await prisma.creditEcheanceMensuelle.deleteMany()
+  await prisma.creditEcheanceAnnuelle.deleteMany()
+  await prisma.credit.deleteMany()
   await prisma.payment.deleteMany()
   await prisma.lease.deleteMany()
   await prisma.tenant.deleteMany()
@@ -178,6 +182,62 @@ async function main() {
     })
   }
 
+  // Crédit immobilier
+  const credit = await prisma.credit.create({
+    data: {
+      nom: "Prêt acquisition T2 Lyon",
+      montantTotal: 165000,
+      tauxInteret: 1.85,
+      dureeEnMois: 240,
+      dateDebut: new Date("2022-03-01"),
+      banque: "Crédit Agricole",
+      propertyId: property.id,
+    },
+  })
+
+  // Échéances annuelles par défaut
+  const echeancesAnnuelles = [
+    { annee: 2022, montant: 752.30 },
+    { annee: 2023, montant: 752.30 },
+    { annee: 2024, montant: 752.30 },
+    { annee: 2025, montant: 752.30 },
+    { annee: 2026, montant: 752.30 },
+  ]
+
+  for (const ea of echeancesAnnuelles) {
+    await prisma.creditEcheanceAnnuelle.create({
+      data: { ...ea, creditId: credit.id },
+    })
+  }
+
+  // Overrides mensuels (exemples)
+  const echeancesMensuelles = [
+    { mois: "2025-03", montant: 1504.60, note: "Double échéance — remboursement anticipé partiel" },
+    { mois: "2025-08", montant: 376.15, note: "Demi-échéance — accord banque" },
+  ]
+
+  for (const em of echeancesMensuelles) {
+    await prisma.creditEcheanceMensuelle.create({
+      data: { ...em, creditId: credit.id },
+    })
+  }
+
+  // Contacts utiles
+  const contacts = [
+    { nom: "Jean Dupont", metier: "plombier", telephone: "06 12 34 56 78", entreprise: "ProPlomb Lyon", email: "contact@proplomb.fr" },
+    { nom: "Marc Leblanc", metier: "electricien", telephone: "06 98 76 54 32", entreprise: "Elec Express", email: null },
+    { nom: "Ali Benali", metier: "serrurier", telephone: "04 72 11 22 33", entreprise: "SOS Clés 69", email: null },
+    { nom: "Société RAS", metier: "deratiseur", telephone: "04 78 55 66 77", entreprise: "RAS Nuisibles", email: "devis@ras-nuisibles.fr" },
+    { nom: "Cabinet Durand", metier: "comptable", telephone: "04 72 22 33 44", entreprise: "Cabinet Durand & Associés", email: "contact@durand-compta.fr" },
+    { nom: "Sophie Girard", metier: "agent_immobilier", telephone: "06 55 44 33 22", entreprise: "Orpi Bellecour", email: "s.girard@orpi.fr" },
+  ]
+
+  for (const c of contacts) {
+    await prisma.contact.create({
+      data: { ...c, propertyId: property.id },
+    })
+  }
+
   console.log("✅ Seed terminé avec succès !")
   console.log(`   - 1 bien immobilier (${property.adresse}, ${property.ville})`)
   console.log(`   - ${equipements.length} équipements`)
@@ -186,6 +246,10 @@ async function main() {
   console.log(`   - ${paiements.length} paiements`)
   console.log(`   - ${depenses.length} dépenses`)
   console.log(`   - ${amortissements.length} amortissements`)
+  console.log(`   - 1 crédit (${credit.nom})`)
+  console.log(`   - ${echeancesAnnuelles.length} échéances annuelles`)
+  console.log(`   - ${echeancesMensuelles.length} overrides mensuels`)
+  console.log(`   - ${contacts.length} contacts utiles`)
 }
 
 main()
