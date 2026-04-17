@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog"
-import { createContact, updateContact } from "@/app/contacts/actions"
+import { createContact, updateContact } from "@/app/(app)/contacts/actions"
 import type { ContactMetier } from "@/types"
 import type { Contact } from "@prisma/client"
 

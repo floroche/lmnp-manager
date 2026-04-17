@@ -58,11 +58,11 @@ export function DerniersPaiements({ paiements }: DerniersPaiementsProps) {
           </TableHeader>
           <TableBody>
             {paiements.map((p, i) => (
-              <TableRow key={i} className="border-border/30">
+              <TableRow key={i} className="border-border/30 transition-colors hover:bg-secondary/40">
                 <TableCell className="font-medium">
                   {formatMois(p.mois)}
                 </TableCell>
-                <TableCell>{formatEuros(p.montantRecu)}</TableCell>
+                <TableCell className="tabular-nums font-medium">{formatEuros(p.montantRecu)}</TableCell>
                 <TableCell className="text-muted-foreground">
                   {p.datePaiement
                     ? formatDateShort(p.datePaiement)

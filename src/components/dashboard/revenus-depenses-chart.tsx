@@ -48,7 +48,10 @@ export function RevenusDepensesChart({ data }: RevenusDepensesChartProps) {
   return (
     <Card className="py-0">
       <CardContent className="p-6">
-        <h3 className="mb-6 text-lg font-bold">Revenus vs Dépenses</h3>
+        <div className="mb-6 flex items-baseline justify-between">
+          <h3 className="text-lg font-bold">Revenus vs Dépenses</h3>
+          <span className="groovy-label text-xs text-muted-foreground">12 derniers mois</span>
+        </div>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data} barGap={4}>
             <CartesianGrid

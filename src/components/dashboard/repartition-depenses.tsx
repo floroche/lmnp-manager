@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Label,
 } from "recharts"
 import { categorieLabel } from "@/lib/utils"
 
@@ -47,6 +48,7 @@ export function RepartitionDepenses({ data }: RepartitionDepensesProps) {
     ...d,
     name: categorieLabel(d.categorie),
   }))
+  const total = data.reduce((s, d) => s + d.montant, 0)
 
   return (
     <Card className="py-0">
@@ -73,6 +75,22 @@ export function RepartitionDepenses({ data }: RepartitionDepensesProps) {
                   fill={COLORS[i % COLORS.length]}
                 />
               ))}
+              <Label
+                content={({ viewBox }) => {
+                  if (!viewBox || !("cx" in viewBox)) return null
+                  const { cx, cy = 0 } = viewBox as { cx: number; cy: number }
+                  return (
+                    <g>
+                      <text x={cx} y={cy - 8} textAnchor="middle" fill="#1A3C2A" fontSize={17} fontWeight="bold">
+                        {total.toLocaleString("fr-FR")} €
+                      </text>
+                      <text x={cx} y={cy + 11} textAnchor="middle" fill="#5A7D66" fontSize={11}>
+                        Total
+                      </text>
+                    </g>
+                  )
+                }}
+              />
             </Pie>
             <Tooltip content={<CustomTooltip />} />
             <Legend

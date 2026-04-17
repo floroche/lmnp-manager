@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { formatEuros, formatDate, formatTaux } from "@/lib/utils"
-import { upsertCredit } from "@/app/credit/actions"
+import { upsertCredit } from "@/app/(app)/credit/actions"
 import { Pencil, X, Landmark, Calendar, Percent, Banknote, Building2 } from "lucide-react"
 import type { CreditInfo } from "@/types"
 
@@ -47,7 +47,7 @@ export function CreditInfoCard({ credit, propertyId }: { credit: CreditInfo | nu
           <CardTitle>{credit ? "Modifier le crédit" : "Ajouter un crédit immobilier"}</CardTitle>
           {credit && (
             <CardAction>
-              <Button variant="ghost" size="icon-sm" onClick={() => setEditing(false)}>
+              <Button variant="ghost" size="icon-sm" aria-label="Annuler la modification" onClick={() => setEditing(false)}>
                 <X className="h-4 w-4" />
               </Button>
             </CardAction>

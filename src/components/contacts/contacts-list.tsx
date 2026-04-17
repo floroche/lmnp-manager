@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { metierLabel } from "@/lib/utils"
-import { deleteContact } from "@/app/contacts/actions"
+import { deleteContact } from "@/app/(app)/contacts/actions"
 import { ContactDialog } from "@/components/contacts/contact-dialog"
 import {
   Plus,
@@ -28,6 +28,7 @@ import {
   HelpCircle,
 } from "lucide-react"
 import type { Contact } from "@prisma/client"
+import Image from "next/image"
 
 const metierIcons: Record<string, React.ElementType> = {
   plombier: Wrench,
@@ -87,8 +88,10 @@ export function ContactsList({
 
       {contacts.length === 0 ? (
         <Card>
-          <CardContent className="py-12 text-center text-muted-foreground">
-            Aucun contact enregistré. Ajoutez votre premier contact !
+          <CardContent className="flex flex-col items-center gap-3 py-14 text-center">
+            <Image src="/mascot-house.png" alt="Mascotte LMNP" width={72} height={72} className="object-contain" />
+            <p className="font-semibold text-foreground">Aucun contact enregistré</p>
+            <p className="text-sm text-muted-foreground">Ajoutez vos artisans, gestionnaires et prestataires.</p>
           </CardContent>
         </Card>
       ) : (
@@ -119,13 +122,17 @@ export function ContactsList({
                   {contact.telephone && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Phone className="h-3.5 w-3.5 shrink-0" />
-                      <span>{contact.telephone}</span>
+                      <a href={`tel:${contact.telephone}`} className="transition-colors hover:text-primary">
+                        {contact.telephone}
+                      </a>
                     </div>
                   )}
                   {contact.email && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Mail className="h-3.5 w-3.5 shrink-0" />
-                      <span className="truncate">{contact.email}</span>
+                      <a href={`mailto:${contact.email}`} className="truncate transition-colors hover:text-primary">
+                        {contact.email}
+                      </a>
                     </div>
                   )}
                   {contact.notes && (

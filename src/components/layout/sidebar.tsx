@@ -17,30 +17,30 @@ import {
   Users,
   User,
 } from "lucide-react"
-import { MascotSun } from "@/components/groovy-mascots"
+import Image from "next/image"
 
 const navigation = [
-  { name: "Tableau de bord", href: "/", icon: LayoutDashboard },
-  { name: "Mon bien", href: "/bien", icon: Home },
-  { name: "Locataire", href: "/locataire", icon: UserRound },
-  { name: "Loyers", href: "/loyers", icon: Coins },
-  { name: "Quittances", href: "/quittances", icon: FileText },
-  { name: "Dépenses", href: "/depenses", icon: BarChart3 },
+  { name: "Tableau de bord", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Mon bien", href: "/bien", icon: Home, comingSoon: true },
+  { name: "Locataire", href: "/locataire", icon: UserRound, comingSoon: true },
+  { name: "Loyers", href: "/loyers", icon: Coins, comingSoon: true },
+  { name: "Quittances", href: "/quittances", icon: FileText, comingSoon: true },
+  { name: "Dépenses", href: "/depenses", icon: BarChart3, comingSoon: true },
   { name: "Crédit", href: "/credit", icon: Landmark },
   { name: "Simulateur", href: "/simulateur", icon: Calculator },
   { name: "Contacts", href: "/contacts", icon: Users },
-  { name: "Calendrier", href: "/calendrier", icon: Calendar },
-  { name: "Documents", href: "/documents", icon: FolderOpen },
+  { name: "Calendrier", href: "/calendrier", icon: Calendar, comingSoon: true },
+  { name: "Documents", href: "/documents", icon: FolderOpen, comingSoon: true },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col bg-[#1A3C2A]">
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-[280px] flex-col bg-[#1A3C2A] lg:flex">
       {/* Logo avec mascotte */}
       <div className="flex items-center gap-3 px-5 py-5">
-        <MascotSun size={52} />
+        <Image src="/mascot-house.png" alt="Mascotte LMNP" width={40} height={52} className="object-contain" />
         <div>
           <h1 className="text-lg font-bold text-[#F5B731]" style={{ fontFamily: "var(--font-display)" }}>
             LMNP Manager
@@ -52,12 +52,29 @@ export function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="mt-2 flex-1 space-y-1 px-3">
+      <nav className="mt-2 flex-1 space-y-0.5 px-3">
         {navigation.map((item) => {
           const isActive =
-            item.href === "/"
-              ? pathname === "/"
+            item.href === "/dashboard"
+              ? pathname === "/dashboard"
               : pathname.startsWith(item.href)
+
+          if (item.comingSoon) {
+            return (
+              <div
+                key={item.name}
+                className="flex cursor-not-allowed items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium text-white/25"
+                title="Bientôt disponible"
+              >
+                <item.icon className="h-5 w-5" />
+                <span>{item.name}</span>
+                <span className="ml-auto rounded-full bg-white/10 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-white/30">
+                  Bientôt
+                </span>
+              </div>
+            )
+          }
+
           return (
             <Link
               key={item.name}

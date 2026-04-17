@@ -87,6 +87,7 @@ export function CreditAnneeGrid({ credit }: { credit: CreditInfo }) {
             <Button
               variant="ghost"
               size="icon-sm"
+              aria-label="Année précédente"
               onClick={() => setAnnee(annee - 1)}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -95,6 +96,7 @@ export function CreditAnneeGrid({ credit }: { credit: CreditInfo }) {
             <Button
               variant="ghost"
               size="icon-sm"
+              aria-label="Année suivante"
               onClick={() => setAnnee(annee + 1)}
             >
               <ChevronRight className="h-4 w-4" />
@@ -110,6 +112,7 @@ export function CreditAnneeGrid({ credit }: { credit: CreditInfo }) {
             <Button
               variant="ghost"
               size="icon-xs"
+              aria-label="Modifier l'échéance annuelle"
               onClick={openAnnuelDialog}
             >
               <Pencil className="h-3 w-3" />
@@ -122,6 +125,7 @@ export function CreditAnneeGrid({ credit }: { credit: CreditInfo }) {
               <button
                 key={echeance.mois}
                 onClick={() => openMensuelDialog(echeance)}
+                aria-label={`Modifier l'échéance de ${formatMoisLong(echeance.mois)}`}
                 className={`group relative flex flex-col items-center gap-1 rounded-xl border p-3 text-center transition-all hover:shadow-md hover:border-[#3A8B5C]/40 ${
                   echeance.isOverride
                     ? "border-[#F5B731]/50 bg-[#F5B731]/8"

@@ -17,7 +17,7 @@ import {
   upsertEcheanceAnnuelle,
   upsertEcheanceMensuelle,
   supprimerEcheanceMensuelle,
-} from "@/app/credit/actions"
+} from "@/app/(app)/credit/actions"
 
 type EcheanceDialogProps = {
   open: boolean
