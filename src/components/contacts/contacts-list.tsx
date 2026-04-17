@@ -89,7 +89,7 @@ export function ContactsList({
       {contacts.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center gap-3 py-14 text-center">
-            <Image src="/mascot-house.png" alt="Mascotte LMNP" width={72} height={72} className="object-contain" />
+            <Image src="/mascot-house.png" alt="Mascotte LMNP" width={54} height={72} className="object-contain" />
             <p className="font-semibold text-foreground">Aucun contact enregistré</p>
             <p className="text-sm text-muted-foreground">Ajoutez vos artisans, gestionnaires et prestataires.</p>
           </CardContent>

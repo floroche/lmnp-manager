@@ -18,7 +18,7 @@ export function DaisyCorner({ position, size = 36, rotation = 0 }: DaisyCornerPr
       style={{ transform: `rotate(${rotation}deg)` }}
       aria-hidden="true"
     >
-      <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      <svg width={size} height={size} viewBox="-2 -2 44 44" fill="none">
         <ellipse cx="20" cy="8" rx="5" ry="9" fill="white" stroke="#1A1A1A" strokeWidth="2.5" />
         <ellipse cx="20" cy="32" rx="5" ry="9" fill="white" stroke="#1A1A1A" strokeWidth="2.5" />
         <ellipse cx="8" cy="20" rx="9" ry="5" fill="white" stroke="#1A1A1A" strokeWidth="2.5" />

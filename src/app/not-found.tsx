@@ -6,7 +6,7 @@ import { Home } from "lucide-react"
 export default function NotFound() {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
-      <Image src="/mascot-house.png" alt="Mascotte LMNP" width={100} height={100} className="object-contain" />
+      <Image src="/mascot-house.png" alt="Mascotte LMNP" width={76} height={100} className="object-contain" />
       <h1 className="mt-6 text-4xl font-bold">404</h1>
       <p className="mt-2 text-lg text-muted-foreground">
         Oups, cette page n'existe pas !

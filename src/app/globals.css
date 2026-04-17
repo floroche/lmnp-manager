@@ -172,6 +172,12 @@ input[type="range"]::-moz-range-track {
   background: var(--muted);
 }
 
+/* === Ticker marquee === */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* === Skeleton shimmer === */
 @keyframes shimmer {
   0% { background-position: -600px 0; }

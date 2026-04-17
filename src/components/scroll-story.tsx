@@ -23,7 +23,7 @@ import { Receipt, Calculator, TrendingUp, ArrowRight, LayoutDashboard } from "lu
 import { FeatureChip } from "@/components/feature-chip"
 import { GroovyButton } from "@/components/groovy-button"
 
-const TOTAL = 240
+const DEFAULT_TOTAL = 240
 const BATCH = 30
 const BG = "#FBF5E8"
 
@@ -62,7 +62,12 @@ function SpinningDaisy() {
   )
 }
 
-export function ScrollStory() {
+interface ScrollStoryProps {
+  totalFrames?: number
+}
+
+export function ScrollStory({ totalFrames = DEFAULT_TOTAL }: ScrollStoryProps = {}) {
+  const TOTAL = totalFrames
   const wrapperRef  = useRef<HTMLDivElement>(null)
   const canvasRef   = useRef<HTMLCanvasElement>(null)
   const frames      = useRef<(HTMLImageElement | null)[]>(new Array(TOTAL).fill(null))

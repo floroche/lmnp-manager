@@ -58,7 +58,7 @@ export default async function CreditPage() {
     <div className="mx-auto max-w-6xl space-y-6">
       {/* En-tête */}
       <div className="flex items-center gap-4">
-        <Image src="/mascot-house.png" alt="Mascotte LMNP" width={56} height={56} className="object-contain" />
+        <Image src="/mascot-house.png" alt="Mascotte LMNP" width={43} height={56} className="object-contain" />
         <div>
           <h1 className="text-3xl font-bold">Crédit immobilier</h1>
           <p className="mt-1 text-muted-foreground">
