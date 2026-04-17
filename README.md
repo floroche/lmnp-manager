@@ -60,22 +60,23 @@ C'est, je pense, la forme que va prendre beaucoup de "dev" dans les 2 prochaines
 | Icônes | **Lucide React** | Set cohérent, léger |
 
 ## 🚀 Démarrage
-
-​```bash
+```
+​bash
 git clone https://github.com/floroche/lmnp-manager.git
 cd lmnp-manager
 npm install
-
+```
 # Base de données : migrations + données de seed
+```
 npm run db:migrate
 npm run db:seed
-
+```
 # Lancer en dev
+```
 npm run dev
-​```
-
+​
 → [http://localhost:3000](http://localhost:3000)
-
+```
 ## 📁 Structure
 
 ​```
