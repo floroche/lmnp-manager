@@ -40,7 +40,7 @@ export function Sidebar() {
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[280px] flex-col bg-[#1A3C2A] lg:flex">
       {/* Logo avec mascotte */}
       <div className="flex items-center gap-3 px-5 py-5">
-        <Image src="/mascot-house.png" alt="Mascotte LMNP" width={40} height={52} className="object-contain" />
+        <Image src="/mascot.png" alt="Mascotte LMNP" width={40} height={40} quality={100} className="object-contain" />
         <div>
           <h1 className="text-lg font-bold text-[#F5B731]" style={{ fontFamily: "var(--font-display)" }}>
             LMNP Manager

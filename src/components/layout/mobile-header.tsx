@@ -43,7 +43,7 @@ export function MobileHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between bg-[#1A3C2A] px-4 lg:hidden shadow-lg">
       <div className="flex items-center gap-2.5">
-        <Image src="/mascot-house.png" alt="Mascotte LMNP" width={26} height={34} className="object-contain" />
+        <Image src="/mascot.png" alt="Mascotte LMNP" width={26} height={26} quality={100} className="object-contain" />
         <span
           className="text-base font-bold text-[#F5B731]"
           style={{ fontFamily: "var(--font-display)" }}
@@ -65,7 +65,7 @@ export function MobileHeader() {
           <SheetTitle className="sr-only">Navigation principale</SheetTitle>
 
           <div className="flex items-center gap-3 px-5 py-5">
-            <Image src="/mascot-house.png" alt="Mascotte LMNP" width={37} height={48} className="object-contain" />
+            <Image src="/mascot.png" alt="Mascotte LMNP" width={37} height={37} quality={100} className="object-contain" />
             <div>
               <p
                 className="font-bold text-[#F5B731]"

@@ -14,152 +14,31 @@ import {
   Star,
   Check,
 } from "lucide-react"
-import { ScrollTest } from "@/components/scroll-test"
 import { DaisyCorner } from "@/components/daisy-corner"
 import { GroovyButton } from "@/components/groovy-button"
-import {
-  MascotSun,
-  MascotCoin,
-  MascotBank,
-  MascotFlower,
-  MascotStar,
-} from "@/components/groovy-mascots"
-
-// ─── data ────────────────────────────────────────────────────────────────────
+import { AnimatedHero } from "@/components/animated-hero"
 
 const TICKER_WORDS = [
   "LMNP", "GESTION LOCATIVE", "CRÉDIT IMMOBILIER", "SIMULATEUR",
   "QUITTANCES", "CONTACTS PRO", "RENDEMENT NET", "CASH-FLOW",
 ]
 
-const features = [
-  {
-    num: "01",
-    icon: TrendingUp,
-    Mascot: MascotSun,
-    color: "#5EC4E8",
-    bg: "#5EC4E812",
-    title: "Dashboard temps réel",
-    desc: "Loyer encaissé, revenus annuels, rendement brut — une seule vue, zéro Excel. Tout se met à jour automatiquement.",
-    href: "/dashboard",
-  },
-  {
-    num: "02",
-    icon: Landmark,
-    Mascot: MascotBank,
-    color: "#F4C430",
-    bg: "#F4C43012",
-    title: "Crédit immobilier",
-    desc: "Tableau d'amortissement complet mois par mois. Modifie chaque échéance manuellement pour les cas hors-norme.",
-    href: "/credit",
-  },
-  {
-    num: "03",
-    icon: Calculator,
-    Mascot: MascotStar,
-    color: "#E8743B",
-    bg: "#E8743B12",
-    title: "Simulateur 30 ans",
-    desc: "Cash-flow, rendement net, revalorisation et revente simulés sur 30 ans. Partage le résultat en un clic.",
-    href: "/simulateur",
-  },
-  {
-    num: "04",
-    icon: Receipt,
-    Mascot: MascotCoin,
-    color: "#6FB04A",
-    bg: "#6FB04A12",
-    title: "Quittances auto",
-    desc: "Génère et envoie les quittances en PDF à ton locataire. Suivi des paiements intégré.",
-    href: "/dashboard",
-  },
-  {
-    num: "05",
-    icon: Users,
-    Mascot: MascotFlower,
-    color: "#F28CAD",
-    bg: "#F28CAD12",
-    title: "Contacts utiles",
-    desc: "Plombier, notaire, assureur, gestionnaire — rangés par métier, accessibles en 1 clic depuis n'importe où.",
-    href: "/contacts",
-  },
-]
-
-const perks = [
-  "14 jours gratuits, sans carte bancaire",
-  "Interface 100 % en français",
-  "Données stockées en France",
-  "Aucune connaissance comptable requise",
-]
-
-// ─── page ────────────────────────────────────────────────────────────────────
-
 export default function LandingPage() {
   return (
     <div className="overflow-x-hidden" style={{ background: "#FBF5E8" }}>
 
-      {/* ══════════════════════════════════════════════
-          HERO — scroll-driven GSAP + header flottant
-      ══════════════════════════════════════════════ */}
-      <ScrollTest>
-        <header
-          className="absolute inset-x-0 top-0 z-40 flex h-16 items-center justify-between px-6 sm:px-10"
-          style={{ background: "linear-gradient(to bottom, #FBF5E8CC 0%, transparent 100%)" }}
-        >
-          <div className="flex items-center gap-3">
-            <Image src="/mascot-house.png" alt="" width={38} height={50} className="object-contain" priority />
-            <span
-              className="text-base font-bold uppercase tracking-widest"
-              style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}
-            >
-              LMNP Manager
-            </span>
-          </div>
+      {/* ══ 1. HERO ══════════════════════════════════════════════════════════ */}
+      <AnimatedHero />
 
-          <nav className="hidden items-center gap-8 lg:flex">
-            {["Fonctionnalités", "Simulateur", "Tarifs"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-xs font-semibold uppercase tracking-wider transition-opacity hover:opacity-40"
-                style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}
-              >
-                {item}
-              </a>
-            ))}
-            <GroovyButton href="/dashboard">Accéder →</GroovyButton>
-          </nav>
-
-          <div className="lg:hidden">
-            <GroovyButton href="/dashboard">
-              <LayoutDashboard className="h-3.5 w-3.5" />
-              App
-            </GroovyButton>
-          </div>
-        </header>
-      </ScrollTest>
-
-      {/* ══════════════════════════════════════════════
-          TICKER — bande dorée défilante
-      ══════════════════════════════════════════════ */}
-      <div
-        className="overflow-hidden border-y-2 border-[#1A1A1A]"
-        style={{ background: "#F4C430" }}
-        aria-hidden="true"
-      >
-        <div
-          className="flex w-max whitespace-nowrap py-3"
-          style={{ animation: "ticker 22s linear infinite" }}
-        >
-          {[0, 1].map((copy) => (
-            <span key={copy} className="flex">
-              {TICKER_WORDS.map((word) => (
-                <span
-                  key={`${copy}-${word}`}
-                  className="px-8 text-sm font-bold uppercase tracking-widest"
-                  style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}
-                >
-                  {word} ·
+      {/* ══ 2. TICKER ════════════════════════════════════════════════════════ */}
+      <div className="overflow-hidden border-y-2 border-[#1A1A1A]" style={{ background: "#F4C430" }} aria-hidden>
+        <div className="flex w-max whitespace-nowrap py-3" style={{ animation: "ticker 24s linear infinite" }}>
+          {[0, 1].map(c => (
+            <span key={c} className="flex">
+              {TICKER_WORDS.map(w => (
+                <span key={`${c}-${w}`} className="px-8 text-sm font-bold uppercase tracking-widest"
+                  style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}>
+                  {w} ·
                 </span>
               ))}
             </span>
@@ -167,232 +46,233 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════════════════
-          STATEMENT — headline éditoriale + perks
-      ══════════════════════════════════════════════ */}
-      <section className="relative py-20 sm:py-28">
-        <DaisyCorner position="tr" size={52} rotation={9} />
-        <DaisyCorner position="bl" size={40} rotation={-7} />
+      {/* ══ 3. STATEMENT — éditorial avant/après ═════════════════════════════ */}
+      <section className="relative overflow-hidden py-20 sm:py-28" style={{ background: "#FBF5E8" }}>
+        <DaisyCorner position="tr" size={56} rotation={8} />
 
         <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
-          <div className="grid gap-16 lg:grid-cols-[1fr_380px] lg:items-center">
 
-            {/* Gauche — texte */}
+          {/* Accent bar */}
+          <div className="mb-10 h-[3px] w-14 rounded-full" style={{ background: "#E8743B" }} />
+
+          <div className="grid items-end gap-16 lg:grid-cols-2">
+
+            {/* Gauche — le problème */}
             <div>
-              <p
-                className="-rotate-1 mb-4 inline-block text-xl"
-                style={{ fontFamily: "var(--font-accent)", color: "#E8743B" }}
-              >
-                enfin une appli qui comprend les propriétaires LMNP
+              <p className="-rotate-1 mb-5 inline-block text-xl"
+                style={{ fontFamily: "var(--font-accent)", color: "#E8743B" }}>
+                avant LMNP Manager…
               </p>
-
-              <h1
-                className="font-bold uppercase leading-[0.88]"
+              <h2
+                className="font-bold uppercase leading-[0.84]"
                 style={{
                   fontFamily: "var(--font-display)",
+                  fontSize: "clamp(52px, 7vw, 108px)",
                   color: "#1A1A1A",
-                  fontSize: "clamp(56px, 8vw, 120px)",
                 }}
               >
-                Gérez votre
+                3H PAR
                 <br />
-                <span style={{ color: "#E8743B" }}>LMNP</span>
+                <span
+                  className="relative inline-block"
+                  style={{ color: "#E8743B" }}
+                >
+                  SEMAINE
+                  {/* Barré */}
+                  <svg aria-hidden className="absolute left-0 top-1/2 w-full" viewBox="0 0 300 12" preserveAspectRatio="none" style={{ transform: "translateY(-50%)" }}>
+                    <line x1="0" y1="6" x2="300" y2="6" stroke="#1A1A1A" strokeWidth="5" strokeLinecap="round" />
+                  </svg>
+                </span>
                 <br />
-                sans prise
-                <br />
-                de tête.
-              </h1>
+                sur Excel.
+              </h2>
+            </div>
 
-              <div className="mt-10 flex flex-wrap gap-4">
-                <GroovyButton href="/dashboard" size="lg">
-                  <LayoutDashboard className="h-4 w-4" />
-                  Essayer gratuitement
-                </GroovyButton>
-                <GroovyButton href="/simulateur" variant="secondary" size="lg">
-                  Simuler ma rentabilité
-                  <ArrowRight className="h-4 w-4" />
-                </GroovyButton>
+            {/* Droite — la solution */}
+            <div className="flex flex-col gap-6">
+              <div
+                className="groovy-sticker px-8 py-7"
+                style={{ background: "#1A3C2A" }}
+              >
+                <p className="-rotate-1 mb-2 inline-block text-xl"
+                  style={{ fontFamily: "var(--font-accent)", color: "#F4C430" }}>
+                  avec LMNP Manager
+                </p>
+                <p
+                  className="font-bold uppercase tabular-nums leading-none"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(52px, 7vw, 88px)",
+                    color: "#6FB04A",
+                  }}
+                >
+                  20 MIN.
+                </p>
+                <p className="mt-2 text-sm" style={{ fontFamily: "var(--font-body)", color: "#FBF5E855" }}>
+                  C'est 87 % de temps en moins.
+                </p>
               </div>
 
-              {/* Perks list */}
-              <ul className="mt-8 space-y-2">
-                {perks.map((p) => (
-                  <li key={p} className="flex items-center gap-2.5">
+              <ul className="space-y-2.5">
+                {[
+                  "Dashboard auto-mis à jour en temps réel",
+                  "Quittances générées en 1 clic",
+                  "Simulation 30 ans instantanée",
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-3">
                     <span
                       className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
                       style={{ background: "#3A8B5C" }}
                     >
                       <Check className="h-3 w-3 text-white" strokeWidth={3} />
                     </span>
-                    <span
-                      className="text-sm"
-                      style={{ fontFamily: "var(--font-body)", color: "#1A1A1A88" }}
-                    >
-                      {p}
+                    <span className="text-sm" style={{ fontFamily: "var(--font-body)", color: "#1A1A1A80" }}>
+                      {item}
                     </span>
                   </li>
                 ))}
               </ul>
             </div>
-
-            {/* Droite — mascot card avec bulle */}
-            <div className="relative flex flex-col items-center gap-5">
-              {/* Speech bubble */}
-              <div
-                className="groovy-sticker -rotate-2 px-5 py-3 text-center"
-                style={{ background: "#F4C430" }}
-              >
-                <p
-                  className="text-sm font-bold"
-                  style={{ fontFamily: "var(--font-display)", color: "#1A1A1A", textTransform: "uppercase", letterSpacing: "0.05em" }}
-                >
-                  "Setup en 3 min, zéro Excel depuis !"
-                </p>
-                <p
-                  className="mt-1 text-xs"
-                  style={{ fontFamily: "var(--font-body)", color: "#1A1A1A66" }}
-                >
-                  — Julien R., 2 biens LMNP
-                </p>
-              </div>
-
-              {/* Mascot card */}
-              <div
-                className="groovy-sticker relative w-full overflow-hidden"
-                style={{ background: "#F4C43018", aspectRatio: "4/5" }}
-              >
-                <DaisyCorner position="tl" size={24} rotation={-10} />
-                <DaisyCorner position="br" size={20} rotation={8} />
-                <Image
-                  src="/mascot-house.png"
-                  alt="Mascotte LMNP Manager"
-                  fill
-                  className="object-contain object-bottom p-6"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          STATS — 3 chiffres forts, fond vert
-      ══════════════════════════════════════════════ */}
-      <section
-        className="border-y-2 border-[#1A1A1A]"
-        style={{ background: "#1A3C2A" }}
-      >
-        <div className="mx-auto grid max-w-[1200px] grid-cols-3 divide-x-2 divide-[#FBF5E820] px-6 sm:px-10">
-          {[
-            { value: "2 500+", label: "Propriétaires actifs", accent: "#F4C430" },
-            { value: "14 j", label: "Essai gratuit", accent: "#5EC4E8" },
-            { value: "0 €", label: "Sans carte bancaire", accent: "#6FB04A" },
-          ].map((s) => (
-            <div key={s.label} className="py-10 px-6 text-center">
-              <div
-                className="tabular-nums font-bold leading-none"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  color: s.accent,
-                  fontSize: "clamp(40px, 5vw, 72px)",
-                }}
-              >
-                {s.value}
-              </div>
-              <div
-                className="mt-2 text-xs uppercase tracking-wider"
-                style={{ fontFamily: "var(--font-display)", color: "#FBF5E860" }}
-              >
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════
-          FEATURES — rangées alternées avec mascottes SVG
-      ══════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28" style={{ background: "#FBF5E8" }}>
+      {/* ══ 4. FEATURES — bento grid ═════════════════════════════════════════ */}
+      <section className="border-t-2 border-[#1A1A1A] py-20 sm:py-24" style={{ background: "#0B1A10" }}>
         <div className="mx-auto max-w-[1200px] px-6 sm:px-10">
 
-          {/* Section label */}
-          <div className="mb-16 flex items-center gap-4">
-            <div className="h-0.5 flex-1" style={{ background: "#1A1A1A15" }} />
-            <span
-              className="text-xs font-bold uppercase tracking-widest"
-              style={{ fontFamily: "var(--font-display)", color: "#1A1A1A40" }}
-            >
+          <div className="mb-12">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em]"
+              style={{ fontFamily: "var(--font-display)", color: "#FBF5E830" }}>
               5 outils · une seule interface
-            </span>
-            <div className="h-0.5 flex-1" style={{ background: "#1A1A1A15" }} />
+            </p>
+            <h2 className="font-bold uppercase leading-[0.88]"
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(28px, 3.5vw, 52px)",
+                color: "#FBF5E8",
+              }}>
+              Tout ce dont vous avez besoin
+            </h2>
           </div>
 
-          <div className="space-y-6">
-            {features.map((f, i) => (
-              <div
-                key={f.num}
-                className="group grid items-center gap-6 rounded-2xl border-2 border-[#1A1A1A08] p-6 transition-all duration-200 hover:border-[#1A1A1A15] hover:shadow-[4px_4px_0_#1A1A1A08] sm:p-8 lg:grid-cols-[80px_1fr_160px]"
-                style={{ background: f.bg }}
-              >
-                {/* Numéro */}
-                <span
-                  className="hidden text-5xl font-bold tabular-nums lg:block"
-                  style={{ fontFamily: "var(--font-display)", color: `${f.color}50` }}
-                >
-                  {f.num}
-                </span>
+          {/* Bento */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
 
-                {/* Contenu */}
-                <div>
-                  <div className="mb-3 flex items-center gap-3">
-                    <div
-                      className="flex h-9 w-9 items-center justify-center rounded-xl"
-                      style={{ background: `${f.color}20` }}
-                    >
-                      <f.icon className="h-4.5 w-4.5" style={{ color: f.color }} />
-                    </div>
-                    <h3
-                      className="text-xl font-bold uppercase"
-                      style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}
-                    >
-                      {f.title}
-                    </h3>
-                  </div>
-                  <p
-                    className="max-w-[520px] text-sm leading-relaxed"
-                    style={{ fontFamily: "var(--font-body)", color: "#1A1A1A77" }}
-                  >
-                    {f.desc}
-                  </p>
-                </div>
-
-                {/* Mascot SVG */}
-                <div className="hidden items-center justify-center lg:flex">
-                  <f.Mascot size={96} />
-                </div>
+            {/* Dashboard — large */}
+            <div className="groovy-sticker col-span-1 flex flex-col gap-5 p-7 sm:col-span-2"
+              style={{ background: "#132718", borderColor: "#FBF5E810" }}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: "#5EC4E818" }}>
+                <TrendingUp className="h-5 w-5" style={{ color: "#5EC4E8" }} />
               </div>
-            ))}
+              <div>
+                <h3 className="text-xl font-bold uppercase" style={{ fontFamily: "var(--font-display)", color: "#FBF5E8" }}>
+                  Dashboard temps réel
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#FBF5E858" }}>
+                  Loyer encaissé, revenus annuels, rendement brut — une seule vue, zéro Excel. Tout se met à jour automatiquement.
+                </p>
+              </div>
+              <div className="mt-auto flex items-baseline gap-2">
+                <span className="tabular-nums text-4xl font-bold"
+                  style={{ fontFamily: "var(--font-display)", color: "#5EC4E8" }}>100%</span>
+                <span className="text-xs uppercase tracking-wide"
+                  style={{ fontFamily: "var(--font-display)", color: "#FBF5E835" }}>automatique</span>
+              </div>
+            </div>
+
+            {/* Crédit */}
+            <div className="groovy-sticker flex flex-col gap-4 p-7"
+              style={{ background: "#F4C43010", borderColor: "#F4C43020" }}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: "#F4C43020" }}>
+                <Landmark className="h-5 w-5" style={{ color: "#F4C430" }} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold uppercase" style={{ fontFamily: "var(--font-display)", color: "#FBF5E8" }}>
+                  Crédit immobilier
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#FBF5E855" }}>
+                  Tableau d'amortissement complet, modifiable mois par mois.
+                </p>
+              </div>
+            </div>
+
+            {/* Simulateur */}
+            <div className="groovy-sticker flex flex-col gap-4 p-7"
+              style={{ background: "#E8743B10", borderColor: "#E8743B20" }}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: "#E8743B20" }}>
+                <Calculator className="h-5 w-5" style={{ color: "#E8743B" }} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold uppercase" style={{ fontFamily: "var(--font-display)", color: "#FBF5E8" }}>
+                  Simulateur 30 ans
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#FBF5E855" }}>
+                  Cash-flow, rendement net et revente simulés sur 30 ans.
+                </p>
+              </div>
+            </div>
+
+            {/* Quittances */}
+            <div className="groovy-sticker flex flex-col gap-4 p-7"
+              style={{ background: "#6FB04A10", borderColor: "#6FB04A20" }}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: "#6FB04A20" }}>
+                <Receipt className="h-5 w-5" style={{ color: "#6FB04A" }} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold uppercase" style={{ fontFamily: "var(--font-display)", color: "#FBF5E8" }}>
+                  Quittances auto
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#FBF5E855" }}>
+                  Génère et envoie les quittances PDF. Suivi des paiements intégré.
+                </p>
+              </div>
+            </div>
+
+            {/* Contacts */}
+            <div className="groovy-sticker col-span-1 flex flex-col gap-4 p-7 sm:col-span-2 lg:col-span-1"
+              style={{ background: "#F28CAD10", borderColor: "#F28CAD20" }}>
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl" style={{ background: "#F28CAD20" }}>
+                <Users className="h-5 w-5" style={{ color: "#F28CAD" }} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold uppercase" style={{ fontFamily: "var(--font-display)", color: "#FBF5E8" }}>
+                  Contacts utiles
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#FBF5E855" }}>
+                  Plombier, notaire, assureur — rangés par métier, 1 clic.
+                </p>
+              </div>
+            </div>
+
           </div>
 
-          <div className="mt-12 flex justify-center">
+          <div className="mt-10 flex justify-center">
             <GroovyButton href="/dashboard" size="lg">
-              Accéder à l'app
-              <ArrowRight className="h-4 w-4" />
+              Accéder à l'app <ArrowRight className="h-4 w-4" />
             </GroovyButton>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          TESTIMONIAL — grande citation
-      ══════════════════════════════════════════════ */}
-      <section className="relative border-t-2 border-[#1A1A1A] py-24 sm:py-32" style={{ background: "#1A3C2A" }}>
-        <DaisyCorner position="tl" size={52} rotation={-10} />
-        <DaisyCorner position="br" size={44} rotation={7} />
+      {/* ══ 5. TESTIMONIAL ═══════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden border-t-2 border-[#1A1A1A] py-24 sm:py-32"
+        style={{ background: "#FBF5E8" }}>
+        <DaisyCorner position="tl" size={56} rotation={-12} />
+        <DaisyCorner position="br" size={48} rotation={9} />
 
-        <div className="mx-auto max-w-[800px] px-6 text-center sm:px-10">
-          <div className="mb-6 flex justify-center gap-1">
+        <div className="mx-auto max-w-[900px] px-6 sm:px-10">
+
+          {/* Guillemet déco */}
+          <div
+            className="mb-6 text-[120px] font-bold leading-none"
+            style={{ fontFamily: "var(--font-display)", color: "#1A1A1A08", lineHeight: 0.8 }}
+            aria-hidden
+          >
+            "
+          </div>
+
+          <div className="mb-6 flex gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="h-5 w-5 fill-[#F4C430] stroke-none" />
             ))}
@@ -402,25 +282,23 @@ export default function LandingPage() {
             className="leading-tight"
             style={{
               fontFamily: "var(--font-accent)",
-              color: "#FBF5E8",
-              fontSize: "clamp(28px, 4.5vw, 60px)",
+              color: "#1A1A1A",
+              fontSize: "clamp(30px, 4.5vw, 62px)",
             }}
           >
             "Mon expert-comptable est bluffé. Setup en 3 minutes, zéro Excel depuis."
           </blockquote>
 
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <div
-              className="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold"
-              style={{ background: "#E8743B", color: "#FBF5E8" }}
-            >
+          <div className="mt-10 flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full text-base font-bold"
+              style={{ background: "#E8743B", color: "#FBF5E8" }}>
               J
             </div>
-            <div className="text-left">
-              <p className="text-sm font-bold" style={{ fontFamily: "var(--font-display)", color: "#FBF5E8" }}>
+            <div>
+              <p className="font-bold" style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}>
                 Julien R.
               </p>
-              <p className="text-xs" style={{ fontFamily: "var(--font-body)", color: "#FBF5E855" }}>
+              <p className="text-sm" style={{ fontFamily: "var(--font-body)", color: "#1A1A1A55" }}>
                 2 biens LMNP · Lyon
               </p>
             </div>
@@ -428,112 +306,80 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          CTA — split or / vert
-      ══════════════════════════════════════════════ */}
-      <section className="grid border-t-2 border-[#1A1A1A] lg:min-h-[480px] lg:grid-cols-2">
+      {/* ══ 6. CTA SPLIT ═════════════════════════════════════════════════════ */}
+      <section className="grid border-t-2 border-[#1A1A1A] lg:min-h-[500px] lg:grid-cols-2">
 
-        {/* Gauche — or, mascot */}
-        <div
-          className="relative flex items-end justify-center border-b-2 border-[#1A1A1A] lg:border-b-0 lg:border-r-2"
-          style={{ background: "#F4C430", minHeight: "300px" }}
-        >
-          <DaisyCorner position="tr" size={48} rotation={10} />
-          <DaisyCorner position="bl" size={36} rotation={-5} />
+        {/* Or — mascotte */}
+        <div className="relative flex items-end justify-center border-b-2 border-[#1A1A1A] lg:border-b-0 lg:border-r-2"
+          style={{ background: "#F4C430", minHeight: "280px" }}>
+          <DaisyCorner position="tr" size={52} rotation={12} />
+          <DaisyCorner position="bl" size={40} rotation={-6} />
           <Image
-            src="/mascot-house.png"
+            src="/mascot-hero.png"
             alt="Mascotte LMNP Manager"
-            width={240}
-            height={312}
-            className="relative z-10 object-contain drop-shadow-xl"
+            width={210}
+            height={264}
+            quality={100}
+            className="relative z-10 object-contain drop-shadow-2xl"
             style={{ marginBottom: "-2px" }}
           />
         </div>
 
-        {/* Droite — vert, texte CTA */}
-        <div
-          className="relative flex flex-col justify-center px-10 py-20 sm:px-16"
-          style={{ background: "#1A3C2A" }}
-        >
-          <DaisyCorner position="br" size={44} rotation={6} />
+        {/* Vert — texte */}
+        <div className="relative flex flex-col justify-center px-10 py-20 sm:px-16"
+          style={{ background: "#0B1A10" }}>
+          <DaisyCorner position="br" size={48} rotation={7} />
 
-          <span
-            className="-rotate-1 mb-4 block text-xl"
-            style={{ fontFamily: "var(--font-accent)", color: "#F4C430" }}
-          >
+          <span className="-rotate-1 mb-5 block text-xl"
+            style={{ fontFamily: "var(--font-accent)", color: "#F4C430" }}>
             prêt à simplifier votre gestion ?
           </span>
 
           <h2
-            className="font-bold uppercase leading-[0.88]"
+            className="font-bold uppercase leading-[0.86]"
             style={{
               fontFamily: "var(--font-display)",
+              fontSize: "clamp(38px, 5vw, 80px)",
               color: "#FBF5E8",
-              fontSize: "clamp(36px, 4.5vw, 72px)",
             }}
           >
             Rejoignez
             <br />
             la team{" "}
-            <span
-              className="inline-block rotate-1"
-              style={{ fontFamily: "var(--font-accent)", color: "#F4C430", textTransform: "none" }}
-            >
+            <span className="inline-block rotate-1"
+              style={{ fontFamily: "var(--font-accent)", color: "#F4C430", textTransform: "none" }}>
               groovy.
             </span>
           </h2>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10">
             <GroovyButton href="/dashboard" size="lg">
-              <LayoutDashboard className="h-4 w-4" />
-              Commencer gratuitement
+              <LayoutDashboard className="h-4 w-4" /> Commencer gratuitement
             </GroovyButton>
           </div>
-
-          <p
-            className="mt-4 text-sm"
-            style={{ fontFamily: "var(--font-body)", color: "#FBF5E840" }}
-          >
+          <p className="mt-4 text-sm" style={{ fontFamily: "var(--font-body)", color: "#FBF5E835" }}>
             14 jours gratuits · sans carte bancaire · sans engagement
           </p>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          FOOTER
-      ══════════════════════════════════════════════ */}
-      <footer
-        className="border-t-2 border-[#1A1A1A] px-6 py-6 sm:px-10"
-        style={{ background: "#FBF5E8" }}
-      >
+      {/* ══ 7. FOOTER ════════════════════════════════════════════════════════ */}
+      <footer className="border-t-2 border-[#1A1A1A] px-6 py-5 sm:px-10" style={{ background: "#FBF5E8" }}>
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Image src="/mascot-house.png" alt="" width={18} height={24} className="object-contain opacity-40" />
-            <span
-              className="text-xs font-bold uppercase tracking-widest opacity-40"
-              style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}
-            >
+          <div className="flex items-center gap-2 opacity-35">
+            <Image src="/mascot-house.png" alt="" width={14} height={18} quality={100} className="object-contain" />
+            <span className="text-xs font-bold uppercase tracking-widest"
+              style={{ fontFamily: "var(--font-display)", color: "#1A1A1A" }}>
               LMNP Manager
             </span>
           </div>
-
-          <span
-            className="text-xs opacity-30"
-            style={{ fontFamily: "var(--font-body)", color: "#1A1A1A" }}
-          >
+          <span className="text-xs opacity-25" style={{ fontFamily: "var(--font-body)", color: "#1A1A1A" }}>
             © 2026 · Fait avec ♥ en France
           </span>
-
-          <div className="flex items-center gap-4 opacity-30" style={{ color: "#1A1A1A" }}>
-            <Link href="#" aria-label="Email" className="transition-opacity hover:opacity-70">
-              <Mail className="h-4 w-4" />
-            </Link>
-            <Link href="#" aria-label="Twitter" className="transition-opacity hover:opacity-70">
-              <Twitter className="h-4 w-4" />
-            </Link>
-            <Link href="#" aria-label="Instagram" className="transition-opacity hover:opacity-70">
-              <Instagram className="h-4 w-4" />
-            </Link>
+          <div className="flex items-center gap-4 opacity-25" style={{ color: "#1A1A1A" }}>
+            <Link href="#" aria-label="Email" className="transition-opacity hover:opacity-60"><Mail className="h-4 w-4" /></Link>
+            <Link href="#" aria-label="Twitter" className="transition-opacity hover:opacity-60"><Twitter className="h-4 w-4" /></Link>
+            <Link href="#" aria-label="Instagram" className="transition-opacity hover:opacity-60"><Instagram className="h-4 w-4" /></Link>
           </div>
         </div>
       </footer>

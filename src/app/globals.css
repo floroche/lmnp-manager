@@ -178,6 +178,25 @@ input[type="range"]::-moz-range-track {
   to   { transform: translateX(-50%); }
 }
 
+/* === Mascot float === */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(1deg); }
+  50%       { transform: translateY(-18px) rotate(-1deg); }
+}
+
+/* === Badge spin === */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* === Scroll indicator dot === */
+@keyframes scroll-dot {
+  0%   { transform: translateY(0);   opacity: 1; }
+  80%  { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0);   opacity: 0; }
+}
+
 /* === Skeleton shimmer === */
 @keyframes shimmer {
   0% { background-position: -600px 0; }
