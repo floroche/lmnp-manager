@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/layout/sidebar"
 import { MobileHeader } from "@/components/layout/mobile-header"
+import { AppLoader } from "@/components/app-loader"
 
 export default function AppLayout({
   children,
@@ -8,9 +9,10 @@ export default function AppLayout({
 }) {
   return (
     <>
+      <AppLoader />
       <MobileHeader />
       <Sidebar />
-      <main className="min-h-dvh pt-14 p-4 lg:ml-[280px] lg:pt-0 lg:p-8">
+      <main className="min-h-dvh pt-14 p-4 lg:ml-[280px] lg:pt-10 lg:p-8">
         {children}
       </main>
     </>

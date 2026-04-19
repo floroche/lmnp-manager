@@ -1,11 +1,10 @@
+import Image from "next/image"
 import { prisma } from "@/lib/db"
 import { KpiCards } from "@/components/dashboard/kpi-cards"
 import { RevenusDepensesChart } from "@/components/dashboard/revenus-depenses-chart"
 import { ProchinesEcheances } from "@/components/dashboard/prochaines-echeances"
 import { DerniersPaiements } from "@/components/dashboard/derniers-paiements"
 import { RepartitionDepenses } from "@/components/dashboard/repartition-depenses"
-import Image from "next/image"
-
 export const dynamic = "force-dynamic"
 
 async function getDashboardData() {
@@ -139,30 +138,30 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
-      {/* En-tête groovy avec mascottes */}
+      {/* En-tête */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Image src="/mascot-house.png" alt="Mascotte LMNP" width={43} height={56} className="object-contain" />
+          <Image src="/mascot.png" alt="" width={40} height={40} quality={100} className="object-contain" />
           <div>
-            <h1 className="text-3xl font-bold">Tableau de bord</h1>
-            <p className="mt-1 text-muted-foreground">
+            <h1 className="text-3xl font-bold tracking-tight"
+              style={{ fontFamily: "var(--font-fraunces)", color: "#1A1A1A" }}>
+              Tableau de bord
+            </h1>
+            <p className="mt-0.5 text-sm" style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A55" }}>
               Bienvenue — voici un résumé de votre bien
             </p>
           </div>
         </div>
-        <div className="hidden items-center gap-3 sm:flex">
+        <div className="hidden items-center sm:flex">
           <div className="text-right">
-            <p className="groovy-label text-xs text-muted-foreground">Aujourd'hui</p>
-            <p className="text-sm font-semibold capitalize">{dateAujourd}</p>
-          </div>
-          <div className="opacity-40">
-            <Image src="/mascot-house.png" alt="" width={31} height={40} className="object-contain" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em]"
+              style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A40" }}>
+              Aujourd'hui
+            </p>
+            <p className="text-sm font-semibold capitalize" style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A" }}>{dateAujourd}</p>
           </div>
         </div>
       </div>
-
-      {/* Bande décorative tricolore */}
-      <div className="groovy-stripe" />
 
       {/* KPI Cards */}
       <KpiCards

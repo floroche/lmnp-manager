@@ -1,8 +1,6 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { TrendingUp, TrendingDown, Percent, Coins } from "lucide-react"
+import { Coins, TrendingUp, TrendingDown, Percent } from "lucide-react"
 import { formatEuros, statutLabel } from "@/lib/utils"
 
 interface KpiCardsProps {
@@ -13,10 +11,10 @@ interface KpiCardsProps {
   rendementBrut: number
 }
 
-function statutBadgeClass(statut: string) {
-  if (statut === "paye") return "bg-primary text-white hover:bg-primary"
-  if (statut === "en_retard") return "bg-accent text-foreground hover:bg-accent"
-  return "bg-destructive text-white hover:bg-destructive"
+function statutStyle(statut: string): { bg: string; color: string } {
+  if (statut === "paye") return { bg: "#6FB04A20", color: "#3A8B5C" }
+  if (statut === "en_retard") return { bg: "#F4C43020", color: "#A07C10" }
+  return { bg: "#E8743B20", color: "#C45520" }
 }
 
 export function KpiCards({
@@ -26,74 +24,85 @@ export function KpiCards({
   depensesAnnuelles,
   rendementBrut,
 }: KpiCardsProps) {
+  const badge = statutStyle(statutLoyer)
+
   return (
     <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-      {/* Loyer du mois */}
-      <Card className="col-span-2 py-0 groovy-hover overflow-hidden xl:col-span-1">
-        <div className="h-1 bg-gradient-to-r from-primary to-[#5BAF7A]" />
-        <CardContent className="p-5">
-          <div className="mb-3 flex items-start justify-between">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10">
-              <Coins className="h-4.5 w-4.5 text-primary" />
-            </div>
-            <Badge className={statutBadgeClass(statutLoyer)}>
-              {statutLabel(statutLoyer)}
-            </Badge>
+      {/* Loyer du mois — dark green */}
+      <div className="col-span-2 flex flex-col gap-4 rounded-xl p-6 xl:col-span-1" style={{ background: "#1A3C2A" }}>
+        <div className="flex items-start justify-between">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "#6FB04A18" }}>
+            <Coins className="h-5 w-5" style={{ color: "#6FB04A" }} />
           </div>
-          <p className="groovy-label text-xs text-muted-foreground">Loyer du mois</p>
-          <p className="mt-1.5 tabular-nums text-2xl font-bold lg:text-3xl" style={{ fontFamily: "var(--font-display)" }}>
+          <span
+            className="rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em]"
+            style={{ background: badge.bg, color: badge.color, fontFamily: "var(--font-inter)" }}
+          >
+            {statutLabel(statutLoyer)}
+          </span>
+        </div>
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em]"
+            style={{ fontFamily: "var(--font-inter)", color: "#FBF5E850" }}>
+            Loyer du mois
+          </p>
+          <p className="mt-1.5 tabular-nums text-3xl font-bold"
+            style={{ fontFamily: "var(--font-fraunces)", color: "#FBF5E8" }}>
             {formatEuros(loyerMois)}
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Revenus annuels */}
-      <Card className="py-0 groovy-hover overflow-hidden">
-        <div className="h-1 bg-gradient-to-r from-[#2D6B45] to-primary" />
-        <CardContent className="p-5">
-          <div className="mb-3 flex items-start justify-between">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2D6B45]/10">
-              <TrendingUp className="h-4.5 w-4.5 text-[#2D6B45]" />
-            </div>
-          </div>
-          <p className="groovy-label text-xs text-muted-foreground">Revenus annuels</p>
-          <p className="mt-1.5 tabular-nums text-2xl font-bold lg:text-3xl" style={{ fontFamily: "var(--font-display)" }}>
+      {/* Revenus annuels — gold */}
+      <div className="flex flex-col gap-4 rounded-xl p-6" style={{ background: "#FFF8E0" }}>
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "#F4C43020" }}>
+          <TrendingUp className="h-5 w-5" style={{ color: "#A07C10" }} />
+        </div>
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em]"
+            style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A45" }}>
+            Revenus annuels
+          </p>
+          <p className="mt-1.5 tabular-nums text-2xl font-bold lg:text-3xl"
+            style={{ fontFamily: "var(--font-fraunces)", color: "#1A1A1A" }}>
             {formatEuros(revenusAnnuels)}
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Dépenses annuelles */}
-      <Card className="py-0 groovy-hover overflow-hidden">
-        <div className="h-1 bg-gradient-to-r from-[#E8712A] to-accent" />
-        <CardContent className="p-5">
-          <div className="mb-3 flex items-start justify-between">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E8712A]/10">
-              <TrendingDown className="h-4.5 w-4.5 text-[#E8712A]" />
-            </div>
-          </div>
-          <p className="groovy-label text-xs text-muted-foreground">Dépenses annuelles</p>
-          <p className="mt-1.5 tabular-nums text-2xl font-bold lg:text-3xl" style={{ fontFamily: "var(--font-display)" }}>
+      {/* Dépenses annuelles — orange */}
+      <div className="flex flex-col gap-4 rounded-xl p-6" style={{ background: "#FDEEE6" }}>
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "#E8743B20" }}>
+          <TrendingDown className="h-5 w-5" style={{ color: "#E8743B" }} />
+        </div>
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em]"
+            style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A45" }}>
+            Dépenses annuelles
+          </p>
+          <p className="mt-1.5 tabular-nums text-2xl font-bold lg:text-3xl"
+            style={{ fontFamily: "var(--font-fraunces)", color: "#1A1A1A" }}>
             {formatEuros(depensesAnnuelles)}
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Rendement brut */}
-      <Card className="py-0 groovy-hover overflow-hidden">
-        <div className="h-1 bg-gradient-to-r from-accent to-[#F5D76E]" />
-        <CardContent className="p-5">
-          <div className="mb-3 flex items-start justify-between">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/15">
-              <Percent className="h-4.5 w-4.5 text-[#D49A1A]" />
-            </div>
-          </div>
-          <p className="groovy-label text-xs text-muted-foreground">Rendement brut</p>
-          <p className="mt-1.5 tabular-nums text-2xl font-bold lg:text-3xl" style={{ fontFamily: "var(--font-display)" }}>
+      {/* Rendement brut — light green */}
+      <div className="flex flex-col gap-4 rounded-xl p-6" style={{ background: "#EEF7E8" }}>
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "#6FB04A20" }}>
+          <Percent className="h-5 w-5" style={{ color: "#3A8B5C" }} />
+        </div>
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em]"
+            style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A45" }}>
+            Rendement brut
+          </p>
+          <p className="mt-1.5 tabular-nums text-2xl font-bold lg:text-3xl"
+            style={{ fontFamily: "var(--font-fraunces)", color: "#1A1A1A" }}>
             {rendementBrut.toFixed(1).replace(".", ",")} %
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

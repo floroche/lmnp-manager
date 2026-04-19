@@ -1,9 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { formatEuros, formatMoisLong } from "@/lib/utils"
 import { EcheanceDialog } from "./echeance-dialog"
 import { ChevronLeft, ChevronRight, Pencil } from "lucide-react"
@@ -81,86 +79,73 @@ export function CreditAnneeGrid({ credit }: { credit: CreditInfo }) {
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Année précédente"
-              onClick={() => setAnnee(annee - 1)}
-            >
+      <div className="rounded-xl bg-white p-6" style={{ border: "1px solid #DDD0B4" }}>
+        <div className="mb-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="icon-sm" aria-label="Année précédente" onClick={() => setAnnee(annee - 1)}>
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <CardTitle className="text-xl tabular-nums">{annee}</CardTitle>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              aria-label="Année suivante"
-              onClick={() => setAnnee(annee + 1)}
-            >
+            <span className="text-xl font-bold tabular-nums"
+              style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A" }}>{annee}</span>
+            <Button variant="ghost" size="icon-sm" aria-label="Année suivante" onClick={() => setAnnee(annee + 1)}>
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 text-sm" style={{ color: "#1A1A1A60" }}>
             <span>
               Échéance par défaut :{" "}
-              <span className="font-semibold text-foreground">
+              <span className="font-semibold tabular-nums" style={{ color: "#1A1A1A" }}>
                 {formatEuros(montantDefaut)}
               </span>
             </span>
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              aria-label="Modifier l'échéance annuelle"
-              onClick={openAnnuelDialog}
-            >
+            <Button variant="ghost" size="icon-xs" aria-label="Modifier l'échéance annuelle" onClick={openAnnuelDialog}>
               <Pencil className="h-3 w-3" />
             </Button>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-            {moisList.map((echeance) => (
-              <button
-                key={echeance.mois}
-                onClick={() => openMensuelDialog(echeance)}
-                aria-label={`Modifier l'échéance de ${formatMoisLong(echeance.mois)}`}
-                className={`group relative flex flex-col items-center gap-1 rounded-xl border p-3 text-center transition-all hover:shadow-md hover:border-[#3A8B5C]/40 ${
-                  echeance.isOverride
-                    ? "border-[#F5B731]/50 bg-[#F5B731]/8"
-                    : "border-border bg-card"
-                }`}
-              >
-                <span className="text-xs font-medium capitalize text-muted-foreground">
-                  {formatMoisLong(echeance.mois)}
-                </span>
-                <span className="text-sm font-bold tabular-nums">
-                  {formatEuros(echeance.montant)}
-                </span>
-                {echeance.isOverride && (
-                  <Badge
-                    variant="secondary"
-                    className="bg-[#F5B731]/20 text-[#B8860B] text-[10px] px-1.5 py-0"
-                  >
-                    Modifié
-                  </Badge>
-                )}
-                {echeance.note && (
-                  <span className="text-[10px] text-muted-foreground line-clamp-1">
-                    {echeance.note}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
+        </div>
 
-          <div className="mt-5 flex items-center justify-between border-t pt-4">
-            <span className="text-sm text-muted-foreground">Total annuel</span>
-            <span className="text-lg font-bold">{formatEuros(totalAnnuel)}</span>
-          </div>
-        </CardContent>
-      </Card>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+          {moisList.map((echeance) => (
+            <button
+              key={echeance.mois}
+              onClick={() => openMensuelDialog(echeance)}
+              aria-label={`Modifier l'échéance de ${formatMoisLong(echeance.mois)}`}
+              className="group relative flex flex-col items-center gap-1 rounded-xl border p-3 text-center transition-all hover:shadow-sm"
+              style={{
+                borderColor: echeance.isOverride ? "#F4C430" : "#1A1A1A12",
+                background: echeance.isOverride ? "#FFF8E0" : "#FBF5E8",
+              }}
+            >
+              <span className="text-[11px] font-bold uppercase tracking-[0.1em] capitalize"
+                style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A55" }}>
+                {formatMoisLong(echeance.mois)}
+              </span>
+              <span className="text-sm font-bold tabular-nums" style={{ color: "#1A1A1A" }}>
+                {formatEuros(echeance.montant)}
+              </span>
+              {echeance.isOverride && (
+                <span className="rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider"
+                  style={{ background: "#F4C43030", color: "#A07C10", fontFamily: "var(--font-inter)" }}>
+                  Modifié
+                </span>
+              )}
+              {echeance.note && (
+                <span className="text-[10px] line-clamp-1" style={{ color: "#1A1A1A50" }}>
+                  {echeance.note}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-5 flex items-center justify-between border-t pt-4" style={{ borderColor: "#1A1A1A10" }}>
+          <span className="text-sm" style={{ color: "#1A1A1A55" }}>Total annuel</span>
+          <span className="text-lg font-bold tabular-nums"
+            style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A" }}>
+            {formatEuros(totalAnnuel)}
+          </span>
+        </div>
+      </div>
 
       {dialogOpen && dialogProps && (
         <>

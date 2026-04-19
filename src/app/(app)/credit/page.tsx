@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/db"
-import Image from "next/image"
 import { CreditInfoCard } from "@/components/credit/credit-info-card"
 import { CreditAnneeGrid } from "@/components/credit/credit-annee-grid"
 import type { CreditInfo } from "@/types"
@@ -57,17 +56,15 @@ export default async function CreditPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-6">
       {/* En-tête */}
-      <div className="flex items-center gap-4">
-        <Image src="/mascot-house.png" alt="Mascotte LMNP" width={43} height={56} className="object-contain" />
-        <div>
-          <h1 className="text-3xl font-bold">Crédit immobilier</h1>
-          <p className="mt-1 text-muted-foreground">
-            Gérez vos échéances de prêt mois par mois
-          </p>
-        </div>
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight"
+          style={{ fontFamily: "var(--font-fraunces)", color: "#1A1A1A" }}>
+          Crédit immobilier
+        </h1>
+        <p className="mt-0.5 text-sm" style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A55" }}>
+          Gérez vos échéances de prêt mois par mois
+        </p>
       </div>
-
-      <div className="groovy-stripe" />
 
       {/* Infos crédit */}
       <CreditInfoCard credit={credit} propertyId={propertyId} />

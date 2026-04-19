@@ -45,8 +45,8 @@ export function MobileHeader() {
       <div className="flex items-center gap-2.5">
         <Image src="/mascot.png" alt="Mascotte LMNP" width={26} height={26} quality={100} className="object-contain" />
         <span
-          className="text-base font-bold text-[#F5B731]"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="text-base font-bold text-[#F4C430]"
+          style={{ fontFamily: "var(--font-inter)" }}
         >
           LMNP Manager
         </span>
@@ -68,8 +68,8 @@ export function MobileHeader() {
             <Image src="/mascot.png" alt="Mascotte LMNP" width={37} height={37} quality={100} className="object-contain" />
             <div>
               <p
-                className="font-bold text-[#F5B731]"
-                style={{ fontFamily: "var(--font-display)" }}
+                className="font-bold text-[#F4C430]"
+                style={{ fontFamily: "var(--font-inter)" }}
               >
                 LMNP Manager
               </p>
@@ -107,8 +107,8 @@ export function MobileHeader() {
                   className={cn(
                     "flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all",
                     isActive
-                      ? "bg-white/15 text-white shadow-[0_2px_8px_-2px_rgba(0,0,0,0.2)]"
-                      : "text-white/55 hover:bg-white/8 hover:text-white/85"
+                      ? "bg-[#F4C430]/20 text-[#F4C430] shadow-[0_2px_8px_-2px_rgba(0,0,0,0.2)]"
+                      : "text-white/55 hover:bg-white/8 hover:text-white/80"
                   )}
                 >
                   <item.icon className="h-5 w-5" />
@@ -119,8 +119,8 @@ export function MobileHeader() {
           </nav>
 
           <div className="mx-3 mt-4 flex items-center gap-3 rounded-xl bg-white/8 px-4 py-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5B731]/20">
-              <User className="h-4 w-4 text-[#F5B731]" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4C430]/20">
+              <User className="h-4 w-4 text-[#F4C430]" />
             </div>
             <div>
               <p className="text-sm font-medium text-white">Propriétaire</p>

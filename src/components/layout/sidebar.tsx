@@ -40,9 +40,9 @@ export function Sidebar() {
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[280px] flex-col bg-[#1A3C2A] lg:flex">
       {/* Logo avec mascotte */}
       <div className="flex items-center gap-3 px-5 py-5">
-        <Image src="/mascot.png" alt="Mascotte LMNP" width={40} height={40} quality={100} className="object-contain" />
+        <Image src="/mascot-logo.png" alt="Mascotte LMNP" width={32} height={40} quality={100} style={{ height: "auto" }} />
         <div>
-          <h1 className="text-lg font-bold text-[#F5B731]" style={{ fontFamily: "var(--font-display)" }}>
+          <h1 className="text-lg font-bold text-[#F4C430]" style={{ fontFamily: "var(--font-inter)" }}>
             LMNP Manager
           </h1>
           <p className="text-xs text-white/45">
@@ -82,8 +82,8 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all",
                 isActive
-                  ? "bg-white/15 text-white shadow-[0_2px_8px_-2px_rgba(0,0,0,0.2)]"
-                  : "text-white/55 hover:bg-white/8 hover:text-white/85"
+                  ? "bg-[#F4C430]/20 text-[#F4C430] shadow-[0_2px_8px_-2px_rgba(0,0,0,0.2)]"
+                  : "text-white/55 hover:bg-white/8 hover:text-white/80"
               )}
             >
               <item.icon className="h-5 w-5" />
@@ -95,8 +95,8 @@ export function Sidebar() {
 
       {/* Profil utilisateur */}
       <div className="mx-3 mb-4 flex items-center gap-3 rounded-xl bg-white/8 px-4 py-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F5B731]/20">
-          <User className="h-5 w-5 text-[#F5B731]" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F4C430]/20">
+          <User className="h-5 w-5 text-[#F4C430]" />
         </div>
         <div>
           <p className="text-sm font-medium text-white">Propriétaire</p>

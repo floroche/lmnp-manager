@@ -60,7 +60,10 @@ export function HypothesesPanel({ params, defaults, onChange }: HypothesesPanelP
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="groovy-label text-sm text-muted-foreground">Hypothèses</h2>
+        <h2 className="text-[11px] font-bold uppercase tracking-[0.16em]"
+          style={{ fontFamily: "var(--font-inter)", color: "#1A1A1A50" }}>
+          Hypothèses
+        </h2>
         <Button
           variant="ghost"
           size="sm"
@@ -73,7 +76,7 @@ export function HypothesesPanel({ params, defaults, onChange }: HypothesesPanelP
       </div>
 
       {/* Acquisition */}
-      <details open className="group rounded-xl border bg-card p-4">
+      <details open className="group rounded-xl bg-white p-4" style={{ border: "1px solid #DDD0B4" }}>
         <summary className="cursor-pointer text-sm font-bold select-none">
           Acquisition
         </summary>
@@ -100,7 +103,7 @@ export function HypothesesPanel({ params, defaults, onChange }: HypothesesPanelP
       </details>
 
       {/* Location */}
-      <details open className="group rounded-xl border bg-card p-4">
+      <details open className="group rounded-xl bg-white p-4" style={{ border: "1px solid #DDD0B4" }}>
         <summary className="cursor-pointer text-sm font-bold select-none">
           Location
         </summary>
@@ -127,7 +130,7 @@ export function HypothesesPanel({ params, defaults, onChange }: HypothesesPanelP
       </details>
 
       {/* Financement */}
-      <details open className="group rounded-xl border bg-card p-4">
+      <details open className="group rounded-xl bg-white p-4" style={{ border: "1px solid #DDD0B4" }}>
         <summary className="cursor-pointer text-sm font-bold select-none">
           Financement
         </summary>
@@ -153,8 +156,8 @@ export function HypothesesPanel({ params, defaults, onChange }: HypothesesPanelP
                   onClick={() => set("dureeEmprunt", d)}
                   className={`flex-1 rounded-lg border py-1.5 text-xs font-semibold transition-colors ${
                     params.dureeEmprunt === d
-                      ? "border-[#3A8B5C] bg-[#3A8B5C] text-white"
-                      : "border-border bg-card text-muted-foreground hover:border-[#3A8B5C]/40"
+                      ? "border-[#1A3C2A] bg-[#1A3C2A] text-[#FBF5E8]"
+                      : "border-[#1A1A1A15] bg-[#FBF5E8] text-[#1A1A1A60] hover:border-[#1A3C2A]/40"
                   }`}
                 >
                   {d}
@@ -175,7 +178,7 @@ export function HypothesesPanel({ params, defaults, onChange }: HypothesesPanelP
       </details>
 
       {/* Revente */}
-      <details open className="group rounded-xl border bg-card p-4">
+      <details open className="group rounded-xl bg-white p-4" style={{ border: "1px solid #DDD0B4" }}>
         <summary className="cursor-pointer text-sm font-bold select-none">
           Revente
         </summary>
